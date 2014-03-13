@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="jdev.cordova.bluetooth.ble"
+      version="0.1.0">
+    <name>BLE</name>
+    <description>Bluetooth Low Energy Plugin</description>
+    <license>MIT</license>
+    <keywords>phonegap,ble</keywords>
+ 
+    <js-module src="www/ble.js" name="BLEHelper">
+        <clobbers target="window.ble" />
+    </js-module>
+ 
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BLEHelper">
+                <param name="android-package" value="jdev.cordova.bluetooth.ble.BLEHelper"/>
+            </feature>
+        </config-file>
+		 <config-file target="AndroidManifest.xml" parent="/*">
+                <uses-permission android:name="android.permission.BLUETOOTH"/>
+				<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+        </config-file>
+		<source-file src="src/android/libs/gson-2.2.4.jar" target-dir="libs" />
+        <source-file src="src/android/BLEHelper.java" target-dir="src/jdev/cordova/bluetooth/ble" />
+        <source-file src="src/android/IBeaconPacket.java" target-dir="src/jdev/cordova/bluetooth/ble" />    		
+     </platform>          
+</plugin>
