@@ -136,8 +136,15 @@ public class BLEHelper extends CordovaPlugin {
         callbackContext.error(0);
     }
 
-    private boolean isIBeaconPacket(byte[] scanRecord) {
-        return true;
+	private boolean isIBeaconPacket(byte[] scanRecord) {
+        try {
+            if (scanRecord[2] == (byte) 0x4C && scanRecord[3] == (byte) 0x00 && scanRecord[4] == (byte) 0x02 && scanRecord[5] == (byte) 0x15) {
+                return true;
+            }
+            return false;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     private enum Action {
